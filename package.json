@@ -1,0 +1,48 @@
+{
+  "name": "presentor",
+  "version": "1.0.0",
+  "description": "MCP server that converts textual outlines into beautiful presentations",
+  "main": "dist/mcp-server.js",
+  "bin": {
+    "presentor-mcp": "dist/mcp-server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/mcp-server.js",
+    "dev": "tsc --watch",
+    "prepare": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "dist/**/*.js.map",
+    "README.md",
+    "LICENSE",
+    "install-mcp.sh"
+  ],
+  "keywords": [
+    "presentation",
+    "slides",
+    "pptx",
+    "html",
+    "mcp",
+    "mcp-server"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "@google/genai": "^1.40.0",
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "pptxgenjs": "^3.12.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

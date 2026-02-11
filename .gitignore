@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Generated presentation files
+*.html
+*.pptx
+!examples/*.md
+
+# Private / scratch
+private-examples/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Environment
+.env
+.env.*
+
+# Package tarballs
+*.tgz

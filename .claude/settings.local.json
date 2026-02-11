@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash",
+      "Edit",
+      "Write",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:pixabay.com)",
+      "WebFetch(domain:ai.google.dev)",
+      "WebFetch(domain:geminicli.com)"
+    ]
+  }
+}
