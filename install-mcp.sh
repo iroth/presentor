@@ -36,6 +36,9 @@ warn()   { echo -e "${YELLOW}!${NC} $1"; }
 err()    { echo -e "${RED}✗${NC} $1"; }
 header() { echo -e "\n${BOLD}$1${NC}"; }
 
+# Read from terminal even when stdin is a pipe (curl | bash)
+prompt() { read -r "$@" </dev/tty; }
+
 # ─── JSON Manipulation (via node) ────────────────────────
 
 # json_set FILE JSON_PATH VALUE
@@ -119,14 +122,14 @@ collect_api_keys() {
     info "PIXABAY_API_KEY detected from environment"
   else
     echo -n "  Pixabay API key (free at pixabay.com/api/docs): "
-    read -r PIXABAY_KEY
+    prompt PIXABAY_KEY
   fi
 
   if [ -n "$GEMINI_KEY" ]; then
     info "GEMINI_API_KEY detected from environment"
   else
     echo -n "  Gemini API key (from aistudio.google.com/apikey): "
-    read -r GEMINI_KEY
+    prompt GEMINI_KEY
   fi
 
   echo ""
@@ -299,7 +302,7 @@ present_target_menu() {
   echo ""
   echo "  Enter numbers separated by commas, or 'all'"
   echo -n "  Selection (default: all): "
-  read -r MENU_CHOICE
+  prompt MENU_CHOICE
   MENU_CHOICE="${MENU_CHOICE:-all}"
 
   parse_target_selection "$MENU_CHOICE"
@@ -361,7 +364,7 @@ select_scope() {
   echo "  2) User-wide (available in all projects)"
   echo ""
   echo -n "  Choose [1/2] (default: 1): "
-  read -r SCOPE_CHOICE
+  prompt SCOPE_CHOICE
   SCOPE_CHOICE="${SCOPE_CHOICE:-1}"
 
   case "$SCOPE_CHOICE" in
