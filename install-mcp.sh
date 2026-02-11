@@ -199,10 +199,10 @@ target_claude_code_install() {
     # Remove existing entry (ignore errors)
     claude mcp remove presentor --scope "$claude_scope" 2>/dev/null || true
 
-    local cmd="claude mcp add --transport stdio --scope $claude_scope"
-    [ -n "$PIXABAY_KEY" ] && cmd="$cmd --env PIXABAY_API_KEY=$PIXABAY_KEY"
-    [ -n "$GEMINI_KEY" ]  && cmd="$cmd --env GEMINI_API_KEY=$GEMINI_KEY"
-    cmd="$cmd presentor -- node $SERVER_PATH"
+    local cmd="claude mcp add presentor --transport stdio --scope $claude_scope"
+    [ -n "$PIXABAY_KEY" ] && cmd="$cmd -e PIXABAY_API_KEY=$PIXABAY_KEY"
+    [ -n "$GEMINI_KEY" ]  && cmd="$cmd -e GEMINI_API_KEY=$GEMINI_KEY"
+    cmd="$cmd -- node $SERVER_PATH"
 
     if eval "$cmd" 2>&1; then
       ok "Installed for Claude Code via CLI (scope: $claude_scope)"

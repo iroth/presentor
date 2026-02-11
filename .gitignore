@@ -32,3 +32,5 @@ coverage/
 
 # Package tarballs
 *.tgz
+.mcp.json
+.cursor/mcp.json
