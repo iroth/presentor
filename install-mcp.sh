@@ -39,6 +39,9 @@ header() { echo -e "\n${BOLD}$1${NC}"; }
 # Read from terminal even when stdin is a pipe (curl | bash)
 prompt() { read -r "$@" </dev/tty; }
 
+# Portable uppercase (macOS ships Bash 3.2 which lacks ${var^^})
+to_upper() { echo "$1" | tr '[:lower:]' '[:upper:]'; }
+
 # ─── JSON Manipulation (via node) ────────────────────────
 
 # json_set FILE JSON_PATH VALUE
@@ -287,7 +290,7 @@ present_target_menu() {
   # Build the menu with auto-detection hints
   local i=0
   for target in "${ALL_TARGETS[@]}"; do
-    local name_var="TARGET_${target^^}_NAME"
+    local name_var="TARGET_$(to_upper "$target")_NAME"
     local name="${!name_var}"
     local hint=""
     if "target_${target}_detect" 2>/dev/null; then
@@ -380,7 +383,7 @@ select_scope() {
 
 install_targets() {
   for target in "${SELECTED_TARGETS[@]}"; do
-    local name_var="TARGET_${target^^}_NAME"
+    local name_var="TARGET_$(to_upper "$target")_NAME"
     local name="${!name_var}"
     header "Installing for ${name}..."
     "target_${target}_install"
@@ -412,7 +415,7 @@ print_summary() {
   echo ""
   echo "  Installed targets:"
   for target in "${SELECTED_TARGETS[@]}"; do
-    local name_var="TARGET_${target^^}_NAME"
+    local name_var="TARGET_$(to_upper "$target")_NAME"
     local config
     config="$("target_${target}_config_path")"
     ok "${!name_var}  ->  $config"
